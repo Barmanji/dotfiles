@@ -1,0 +1,29 @@
+# Set window background opacity (0.0 to 1.0, where 1.0 is fully opaque).
+[window]
+opacity = 0.9
+[colors]
+[colors.primary]
+background = "0x000000"
+
+[font]
+# Normal (unscaled) font size. Default is usually 12.0.
+size = 8
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 0
