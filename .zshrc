@@ -101,6 +101,24 @@ alias userkey='screenkey'
 alias xcopy='xclip -selection clipboard'
 alias treenode='tree -I node_modules/'
 alias c='clear'
+
+
+#Git SSH copy and see
+function gssh() { gh repo view "$1" --json sshUrl }
+gcssh() {
+  gh repo view "$1" --json sshUrl | jq -r '.sshUrl' | xclip -selection clipboard
+  echo "SSH URL copied to clipboard."
+}
+#Git input directly ssh
+function gitty() {
+  if [[ -z "$1" ]]; then
+    echo "Please provide a repository name."
+  else
+    git remote add origin "git@github.com:barmanji/$1.git"
+    echo "Remote origin added for repository: $1"
+  fi
+}
+
 # Customize Zsh prompt to show your name and current directory
 # Customize Zsh prompt to show your username and current directory
 #PROMPT='%n:%~ %#'
