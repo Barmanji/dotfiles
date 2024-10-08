@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Ubuntu Regular 8
+font pango:Ubuntu Font 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -21,27 +21,31 @@ font pango:Ubuntu Regular 8
 
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
-exec --no-startup-id dex --autostart --environment i3
+#exec --no-startup-id dex --autostart --environment i3
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# Use pactl to adjust volume in PulseAudio-> CHANGED  to pulsemixer.
-bindsym XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +5 --max-volume 100 #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pulsemixer --change-volume -5 --max-volume 100 #decrease sound volume
-bindsym Shift+XF86AudioRaiseVolume exec --no-startup-id pulsemixer --change-volume +5 --max-volume 400 #increase sound volume
-bindsym Shift+XF86AudioLowerVolume exec --no-startup-id pulsemixer --change-volume -5 --max-volume 400 #decrease sound volume
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status 
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
+#using PW(pipewire) with official docs in Arch linux and wpctl is the commands for that only
+
+
+    bindsym XF86AudioRaiseVolume exec --no-startup-id wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+ && $refresh_i3status
+
+    bindsym XF86AudioLowerVolume exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%- && $refresh_i3status
+
+    bindsym XF86AudioMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+    bindsym XF86AudioMicMute exec --no-startup-id wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle && $refresh_i3status
+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -54,7 +58,8 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id dmenu_run
-bindsym $mod+d exec --no-startup-id rofi -show combi
+bindsym $mod+d exec --no-startup-id rofi -show drun -drun-display-format "{name}" -drun-sort "true"
+
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -113,9 +118,9 @@ bindsym $mod+a focus parent
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "1 "
+set $ws1 "1"
 set $ws2 "2"
-set $ws3 "3" 
+set $ws3 "3"
 set $ws4 "4"
 set $ws5 "5"
 set $ws6 "6"
@@ -185,30 +190,26 @@ bindsym $mod+Shift+Ctrl+Delete exec "i3-nagbar -t warning -m 'You pressed the ex
 #Wallpaper with HNO3-
 
 ## Screenshots
-bindsym Shift+Print exec --no-startup-id maim "/home/$USER/Pictures/Screenshots/$(date)"
-bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/Screenshots/$(date)"
-bindsym Print exec --no-startup-id maim --select "/home/$USER/Pictures/Screenshots/$(date)"
+#bindsym Shift+Print exec --no-startup-id maim "/home/$USER/Pictures/Screenshots/$(date)"
+#bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/Screenshots/$(date)"
+
 
 ## Clipboard Screenshots
-bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
-bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdexec --no-startup-id comptonotool getactivewindow) | xclip -selection clipboard -t image/png
+##bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+##bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdexec --no-startup-id comptonotool getactivewindow) | xclip -selection clipboard -t image/png
 bindsym Ctrl+Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+bindsym Print exec --no-startup-id maim --select "/home/$USER/Pictures/Screenshots/$(date +'%d-%b-%y_%I:%M_%p').png"
+
+#Feh to set wallpaper-
+exec --no-startup-id feh --randomize --bg-scale ~/Downloads/ColorWall/*
+exec --no-startup-id ~/scripts/random_wallpapers.sh
 
 
-#Nitrogen Cycle --
-exec nitrogen --restore
-
-#TouchPad disabling-
-
-exec syndaemon -i 0.3 -R -d
- 
 # use neither window title nor border
 # use window title, but no border
 #bindsym $mod+t border normal 0
 
-#Random Wallpaper SH-
 
-exec --no-startup-id /home/barmanji/scripts/random_wallpaper.sh
 
 #Firefox Browser Shortcut
 bindsym $mod+b exec firefox
@@ -227,22 +228,22 @@ set $text       #ffffff
 set $u-bgcolor  #ff0000
 set $indicator  #a8a3c1
 set $in-text    #969696
-#                       border          background      text            indicator (a line which shows where the next window will be placed)     
+#                       border          background      text            indicator (a line which shows where the next window will be placed)
 client.focused          $bgcolor        $bgcolor        $text           $indicator
 client.unfocused        $in-bgcolor     $in-bgcolor     $in-text        $in-bgcolor
 client.focused_inactive $in-bgcolor     $in-bgcolor     $in-text        $in-bgcolor
-client.urgent           $u-bgcolor      $u-bgcolor      $text           $u-bgcolor 
+client.urgent           $u-bgcolor      $u-bgcolor      $text           $u-bgcolor
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 
 
 bar {
- 
-  
+
+
         #position top
         status_command i3status -c /home/barmanji/.config/i3status/i3status.conf
-       
+     tray_output primary
 }
 
 #bar {      status_command     }
@@ -254,15 +255,15 @@ bar {
 
 #autotiling by i3pc-
 exec_always --no-startup-id autotiling
-### Autostart 
-  exec_always autotiling -w 1 3 5 7 9
+### Autostart
+ exec_always autotiling -w 1 3 5 7 9
 
 
 # Keybinding to lock screen with black background
-bindsym F10 exec "/usr/bin/i3lock -f -c 000000"
+#bindsym F10 exec "/usr/bin/i3lock -f -c 000000"
 
 # Set lock screen image at startup
-exec --no-startup-id /usr/bin/i3lock -f -n -i /home/barmanji/Downloads/Firefox\ Download/69.png
+#exec --no-startup-id /usr/bin/i3lock -f -n -i /home/barmanji/Downloads/Firefox\ Download/69.png
 
 # Auto lock the screen after 1 minute with a black background
 #exec "xautolock -detectsleep -time 1 -locker \"i3lock -c 000000\""
@@ -270,26 +271,26 @@ exec --no-startup-id /usr/bin/i3lock -f -n -i /home/barmanji/Downloads/Firefox\ 
 
 # Overwrite gaps to 0, I need all the space I can get on workspace 3.
 
-workspace 2 gaps inner 0 
-workspace 3 gaps inner 0 
-workspace 4 gaps inner 0 
-workspace 5 gaps inner 0 
-workspace 6 gaps inner 0 
-workspace 7 gaps inner 0 
-workspace 8 gaps inner 0 
-workspace 9 gaps inner 0 
-workspace 10 gaps inner 0  
+workspace 2 gaps inner 0
+workspace 3 gaps inner 0
+workspace 4 gaps inner 0
+workspace 5 gaps inner 0
+workspace 6 gaps inner 0
+workspace 7 gaps inner 0
+workspace 8 gaps inner 0
+workspace 9 gaps inner 0
+workspace 10 gaps inner 0
 
 
-workspace 2 gaps outer 0 
-workspace 3 gaps outer 0 
-workspace 4 gaps outer 0 
-workspace 5 gaps outer 0 
-workspace 6 gaps outer 0 
-workspace 7 gaps outer 0 
-workspace 8 gaps outer 0 
-workspace 9 gaps outer 0 
-workspace 10 gaps outer 0 
+workspace 2 gaps outer 0
+workspace 3 gaps outer 0
+workspace 4 gaps outer 0
+workspace 5 gaps outer 0
+workspace 6 gaps outer 0
+workspace 7 gaps outer 0
+workspace 8 gaps outer 0
+workspace 9 gaps outer 0
+workspace 10 gaps outer 0
 #for_window [class=".*"] border none
 
 
@@ -316,7 +317,7 @@ gaps outer 1
 # Smart gaps (gaps used if only more than one container on the workspace)
 smart_gaps on
 
-# Smart borders (draw borders around container only if it is not the only container on this workspace) 
+# Smart borders (draw borders around container only if it is not the only container on this workspace)
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
 smart_borders on
 
@@ -367,13 +368,13 @@ for_window [class="Gnome-calculator"] focus
  bindsym Ctrl+$mod+Shift+c exec gnome-calculator
 
 
-#Curson bakchodi- 
-exec_always --no-startup-id xsetroot -cursor_name Bibata-Modern-Ice
+#Curson bakchodi-
+#exec_always --no-startup-id xsetroot -cursor_name Bibata-Modern-Ice
 
 # # Sreen brightness controls
 
-bindsym XF86MonBrightnessUp exec --no-startup-id sudo brightnessctl set 1%+
-bindsym XF86MonBrightnessDown exec --no-startup-id sudo brightnessctl set 1%-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +1%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 1%-
 ## Suspend
 bindsym Ctrl+$mod+Shift+period exec systemctl suspend
 
