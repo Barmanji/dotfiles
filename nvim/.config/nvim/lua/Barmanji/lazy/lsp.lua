@@ -59,6 +59,16 @@ return {
             capabilities = capabilities,
             settings = {
               Lua = {
+                runtime = {
+                  version = 'LuaJIT',
+                },
+                diagnostics = {
+                  globals = { 'vim' },
+                },
+                workspace = {
+                  library = vim.api.nvim_get_runtime_file('', true),
+                  checkThirdParty = false,
+                },
                 format = {
                   enable = true,
                   -- Put format options here
@@ -91,8 +101,14 @@ return {
         end,
       },
       window = {
-        completion = cmp.config.window.bordered(),
-        documentation = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered {
+          border = 'rounded',
+          -- winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
+        },
+        documentation = cmp.config.window.bordered {
+          border = 'rounded',
+          -- winhighlight = 'Normal:Normal,FloatBorder:FloatBorder',
+        },
       },
 
       mapping = cmp.mapping.preset.insert {

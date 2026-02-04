@@ -229,3 +229,4 @@ export LIBRARY_PATH=$(g++ -print-search-dirs | grep libraries | cut -d '=' -f2)
 # autoload -Uz compinit && compinit -C
 # zinit cdreplay -q #In docs it says its necessary
 
+export PATH="$HOME/.npm-global/bin:$PATH"

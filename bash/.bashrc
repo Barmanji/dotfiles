@@ -16,3 +16,4 @@ export EDITOR=nvim
 export PATH="$PATH:/home/barmanji/.lmstudio/bin"
 # End of LM Studio CLI section
 
+export PATH="$HOME/.npm-global/bin:$PATH"

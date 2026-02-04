@@ -69,14 +69,16 @@ vim.keymap.set('n', '<leader>lx', function()
 end, { desc = 'Toggle LSP diagnostics' })
 
 vim.keymap.set('n', '<leader>ce', function()
-  vim.cmd 'Copilot enable'
-  print 'Copilot enabled'
+vim.cmd('Copilot enable')
+  print ('Copilot enabled')
 end, { desc = 'Enabled Copilot' })
 
 vim.keymap.set('n', '<leader>cd', function()
-  vim.cmd 'Copilot disable'
-  print 'Copilot disabled'
+  vim.cmd('Copilot disable')
+  print ('Copilot disabled')
 end, { desc = 'Disabled Copilot' })
+
+
 
 
 
