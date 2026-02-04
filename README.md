@@ -10,7 +10,7 @@ My never ending update of this hell, I welcome you here!
 sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si
 ```
 
-### Step 2: Install the Packages
+### Step 2: Install the [Packages](/InstalledArchPackages)
 
 ```bash
 cd dotfiles/InstalledArchPackages
@@ -19,7 +19,7 @@ bash combined_oneliner_pkg.txt
 
 > [!NOTE]
 > Have a look at [Packages](/InstalledArchPackages)
-> If any package installation failed, manual look would be required, go through the files in [Packages](/InstalledArchPackages) and either delete them, or check their name if its a typo.
+> If any package installation failed, manual look would be required, go through the files in [Packages]("https://github.com/Barmanji/dotfiles/tree/master/InstalledArchPackages") and either delete them, or check their name if its a typo.
 
 - At this point all of essential files should have been installed.
 
