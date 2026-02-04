@@ -78,7 +78,6 @@ then use GNU stow to create symlinks
 ````bash
 # or run them separately
 
-```bash
 stow -vt ~ picom wofi cava scripts bash ghostty p10k  feh neofetch InstalledArchPackages tmux swaync rofi xinitrc wlogout waybar wal yazi kitty waypaper nvim zsh alacritty swww
 
 # read hyprland before stowing it, i prefer manual copy
