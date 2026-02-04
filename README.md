@@ -18,7 +18,7 @@ bash combined_oneliner_pkg.txt
 ```
 
 > [!NOTE]
-> Have a look at [Packages](/dotfiles/InstalledArchPackages)
+> Have a look at [Packages](/InstalledArchPackages)
 > If any package installation failed, manual look would be required, go through the files in [Packages]("https://github.com/Barmanji/dotfiles/tree/master/InstalledArchPackages") and either delete them, or check their name if its a typo.
 
 - At this point all of essential files should have been installed.
