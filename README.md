@@ -16,14 +16,15 @@ sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/ya
 cd dotfiles/InstalledArchPackages
 bash combined_oneliner_pkg.txt
 ```
+
 > [!NOTE]
 > Have a look at [Packages]("https://github.com/Barmanji/dotfiles/tree/master/InstalledArchPackages")
 > If any package installation failed, manual look would be required, go through the files in [Packages]("https://github.com/Barmanji/dotfiles/tree/master/InstalledArchPackages") and either delete them, or check their name if its a typo.
 
 - At this point all of essential files should have been installed.
 
-
 ### Step 3: Stow, Git Setup
+
 ### Git
 
 - Check this by running `git --version` in the shell to see if the command is available
@@ -34,7 +35,8 @@ bash combined_oneliner_pkg.txt
 
 - Refer the docs : [Read More](https://www.gnu.org/software/stow/)
 
-```
+```bash
+# If not installed
 yay -S stow
 ```
 
@@ -42,7 +44,7 @@ yay -S stow
 
 First, check out dotfiles repo in your $HOME directory using git
 
-```
+```bash
 git clone git@github.com:Barmanji/dotfiles.git
 cd Godfiles
 ```
@@ -73,16 +75,22 @@ then use GNU stow to create symlinks
 - run stow commands like below for each directory in dotfiles
 - re-check if the symlinks are correct for each sub-directories and files
 
-```bash
+````bash
 # or run them separately
 
-stow -t ~ nvim
-stow -t ~ zsh
-```
+```bash
+stow -vt ~ picom wofi cava scripts bash ghostty p10k  feh neofetch InstalledArchPackages tmux swaync rofi xinitrc wlogout waybar wal yazi kitty waypaper nvim zsh alacritty swww
+
+# read hyprland before stowing it, i prefer manual copy
+````
+
 
 ### Step 4: Tmux + Nvim
+
 #### Tmux
+
 - Considering Tmux is installed, check:
+
 ```bash
 tmux -V
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -92,9 +100,9 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
 #### Nvim
+
 - Considering Nvim is installed and `stow -t ~ nvim` has been done.
 - Just start nvim and enjoy.
-
 
 ##### Misc
 
