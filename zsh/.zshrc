@@ -128,6 +128,7 @@ alias sudonvim='sudo -E nvim'
 alias sn='sudo -E nvim'
 alias pd='pnpm run dev'
 alias pi='pnpm install'
+alias pa='pnpm add'
 alias nd='npm run dev'
 alias ni='npm install'
 alias gs='git status'
@@ -137,7 +138,7 @@ alias fman='print -l ${(ok)commands} | fzf | xargs man'
 alias top='btop'
 alias tsync="tmux_env_sync && source $HOME/.zshrc"
 alias hi="echo bye"
-alias nightlight="$HOME/.config/hypr/scripts/Hyprsunset_Auto_NightLight8PM.sh"
+alias nightlight="~/scripts/nightlight_brightness.sh"
 
 
 autoload -Uz edit-command-line
