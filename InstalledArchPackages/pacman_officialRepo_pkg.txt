@@ -118,6 +118,7 @@ mtools
 mysql-workbench
 nano
 nautilus
+ncmpcpp-git
 network-manager-applet
 networkmanager
 nodejs
