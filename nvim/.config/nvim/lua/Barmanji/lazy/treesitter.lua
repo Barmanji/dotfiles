@@ -2,13 +2,11 @@ return {
   {
     'nvim-treesitter/nvim-treesitter',
     event = { 'BufReadPre', 'BufNewFile' },
+    branch = 'master',
     build = ':TSUpdate',
     config = function()
       -- import nvim-treesitter plugin
-      local treesitter = require 'nvim-treesitter.configs'
-
-      -- configure treesitter
-      treesitter.setup { -- enable syntax highlighting
+      require('nvim-treesitter.configs').setup {
         highlight = {
           -- `false` will disable the whole extension
           enable = true,
@@ -63,7 +61,8 @@ return {
       }
     end,
   },
-    {
+  -- NOTE: js,ts,jsx,tsx Auto Close Tags
+  {
     'nvim-treesitter/nvim-treesitter-context',
     event = 'VeryLazy', -- or set to same events as treesitter
     config = function()
