@@ -1,0 +1,42 @@
+# Movement
+def_key "ctrl-n"
+  scroll_down
+def_key "ctrl-p"
+  scroll_up
+
+def_key "j"
+  scroll_down
+def_key "k"
+  scroll_up
+def_key "h"
+  previous_column
+def_key "l"
+  next_column
+def_key "g"
+  move_home
+def_key "G"
+  move_end
+def_key "ctrl-u"
+  page_up
+def_key "ctrl-d"
+  page_down
+
+# Selection & Actions
+def_key "v"
+  select_item
+# def_key "V"
+#   unselect_item
+def_key "d"
+  delete_playlist_items
+def_key "y"
+  save_playlist
+# def_key "p"
+#   paste_playlist_items
+
+# Searching
+def_key "/"
+  find
+def_key "n"
+  next_found_item
+def_key "N"
+  previous_found_item
