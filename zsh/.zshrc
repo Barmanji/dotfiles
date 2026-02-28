@@ -139,7 +139,7 @@ alias top='btop'
 alias tsync="tmux_env_sync && source $HOME/.zshrc"
 alias hi="echo bye"
 alias nightlight="~/scripts/nightlight_brightness.sh"
-
+alias play="ncmpcpp"
 
 autoload -Uz edit-command-line
 zle -N edit-command-line
