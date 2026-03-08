@@ -4,10 +4,17 @@
     "reload_style_on_change": true,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["custom/notification","clock","custom/pacman"],
-    "modules-right": ["tray","pulseaudio","custom/cava_mviz","group/expand","bluetooth","battery",],
+    "modules-right": ["custom/study_timer","tray","custom/expand","power-profiles-daemon", "custom/colorpicker","cpu","memory","temperature" ,"pulseaudio","custom/cava_mviz","bluetooth","battery"],
 
+"custom/study_timer": {
+    "format": "{}",
+    "return-type": "json",
+    "exec": "$HOME/.config/waybar/scripts/waybar_stats.sh",
+    "interval": 1, // Updates every 30 seconds
+    "on-click": "notify-send 'Study Timer' 'Keep up the good work!'"
+},
     "power-profiles-daemon": {
-        "format": "{icon}",
+        "format": "| {icon}",
         "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
         "tooltip": true,
         "format-icons": {
@@ -77,10 +84,10 @@
         // "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-",
         "on-click-right": "pavucontrol"
     },
-        "custom/expand": {
-        "format": "",
-        "tooltip": false
-    },
+    //     "custom/expand": {
+    //     "format": "",
+    //     "tooltip": false
+    // },
     "custom/endpoint":{
         "format": "|",
         "tooltip": false
@@ -92,7 +99,7 @@
             "transition-to-left": true,
             "click-to-reveal": true
         },
-        "modules": ["custom/expand","power-profiles-daemon", "custom/colorpicker","cpu","memory","temperature","custom/endpoint", ]
+        "modules": ["custom/expand","power-profiles-daemon", "custom/colorpicker","cpu","memory","temperature","custom/endpoint" ]
     },
 
     // "network": {
@@ -175,7 +182,7 @@
     },
     "tray": {
         "icon-size": 14,
-        "spacing": 10,
+        "spacing": 10
 
         // "on-click-right": "kitty -e nmtui", -- DOENST WORK IDK WHY
     }
