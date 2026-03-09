@@ -103,8 +103,6 @@ alias treenode='tree -I node_modules/'
 alias update='$HOME/scripts/system_update_and_maintainance.sh'
 
 #---- My special Shortcuts -----#
-alias rwallpaper="$HOME/.config/swww/swww.sh"
-alias menubar='gsettings set org.gnome.Terminal.Legacy.Settings default-show-menubar' #Set True or False for menubar/Topbar
 alias gapsDisable='$HOME/scripts/gaps_and_rounding_switch.sh'
 alias gapsEnable='$HOME/scripts/gaps_and_rounding_switch.sh'
 alias currentWallpaper='$HOME/scripts/current_wallpaper.sh'

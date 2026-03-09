@@ -4,15 +4,8 @@
     "reload_style_on_change": true,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["custom/notification","clock","custom/pacman"],
-    "modules-right": ["custom/study_timer","tray","custom/expand","power-profiles-daemon", "custom/colorpicker","cpu","memory","temperature" ,"pulseaudio","custom/cava_mviz","bluetooth","battery"],
+    "modules-right": ["tray","custom/expand","power-profiles-daemon", "custom/colorpicker","cpu","memory","temperature" ,"pulseaudio","custom/cava_mviz","bluetooth","battery"],
 
-"custom/study_timer": {
-    "format": "{}",
-    "return-type": "json",
-    "exec": "$HOME/.config/waybar/scripts/waybar_stats.sh",
-    "interval": 1, // Updates every 30 seconds
-    "on-click": "notify-send 'Study Timer' 'Keep up the good work!'"
-},
     "power-profiles-daemon": {
         "format": "| {icon}",
         "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
