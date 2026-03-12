@@ -85,15 +85,6 @@
         "format": "|",
         "tooltip": false
     },
-    "group/expand": {
-        "orientation": "horizontal",
-        "drawer": {
-            "transition-duration": 600,
-            "transition-to-left": true,
-            "click-to-reveal": true
-        },
-        "modules": ["custom/expand","power-profiles-daemon", "custom/colorpicker","cpu","memory","temperature","custom/endpoint" ]
-    },
 
     // "network": {
     //     "format-wifi": "",
