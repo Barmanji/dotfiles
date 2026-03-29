@@ -9,9 +9,9 @@ HYPRLOCK_CONFIG="$HOME/.config/hypr/hyprlock.conf"
 # Kill other running instances of this script
 pkill -fx "$0" 2>/dev/null
 
-# Start swww-daemon if not already running
-if ! pgrep -x "swww-daemon" > /dev/null; then
-    swww-daemon &
+# Start awww-daemon if not already running
+if ! pgrep -x "awww-daemon" > /dev/null; then
+    awww-daemon &
     exit 0  # Exit if this is the first run
 fi
 
@@ -22,8 +22,8 @@ WALLPAPER=$(find "$WALLPAPERS_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" 
 if [[ -n "$WALLPAPER" ]]; then
     echo "$WALLPAPER" > "/home/barmanji/.config/hypr/current_wallpaper.txt"  # Save the wallpaper path
 
-    # Apply wallpaper with swww
-    swww img "$WALLPAPER" \
+    # Apply wallpaper with awww
+    awww img "$WALLPAPER" \
         --transition-type wave \
         --transition-angle 135 \
         --transition-wave 30,20 \
