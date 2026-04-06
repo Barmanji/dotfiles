@@ -38,6 +38,7 @@ autocmd({ "BufWritePre" }, {
 autocmd('LspAttach', {
     group = BarmanjiGroup,
     callback = function(e)
+        -- vim.lsp.document_color.enable(false, e.buf)
         local opts = { buffer = e.buf }
         -- Automatically close location list and quickfix windows with q
         -- vim.keymap.set("n", "<leader>q", function()
@@ -69,4 +70,29 @@ autocmd('LspAttach', {
         vim.keymap.set("n", "<leader>vrn",  function() vim.lsp.buf.rename() end, opts)
         vim.keymap.set("i", "<C-h>",        function() vim.lsp.buf.signature_help({border= "rounded"}) end, opts)
     end
+})
+
+-- 1. Kill it globally right now
+vim.lsp.document_color.enable(false)
+
+-- 2. Intercept the server trying to turn it back on later
+vim.lsp.handlers['client/registerCapability'] = (function(overridden)
+    return function(err, res, ctx)
+        local result = overridden(err, res, ctx)
+        local client = vim.lsp.get_client_by_id(ctx.client_id)
+        if client then
+            for bufnr, _ in pairs(client.attached_buffers) do
+                vim.lsp.document_color.enable(false, bufnr)
+            end
+        end
+        return result
+    end
+end)(vim.lsp.handlers['client/registerCapability'])
+
+-- 3. Safety net for every time you switch buffers
+vim.api.nvim_create_autocmd({ "BufEnter", "LspAttach" }, {
+    group = BarmanjiGroup,
+    callback = function(args)
+        vim.lsp.document_color.enable(false, args.buf)
+    end,
 })

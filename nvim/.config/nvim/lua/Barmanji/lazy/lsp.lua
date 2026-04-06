@@ -12,6 +12,7 @@ return {
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
     'j-hui/fidget.nvim',
+    'roobert/tailwindcss-colorizer-cmp.nvim',
     -- 'zbirenbaum/copilot-cmp', -- Add this if you use Copilot
   },
 
@@ -86,10 +87,10 @@ return {
         end,
 
         ['tailwindcss'] = function()
-          require('lspconfig').tailwindcss.setup {
+          require('lspconfig').tailwindcss.setup({
             capabilities = capabilities,
             filetypes = { 'html', 'css', 'scss', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue', 'svelte', 'heex' },
-          }
+          })
         end,
       },
     }
@@ -101,6 +102,9 @@ return {
         expand = function(args)
           require('luasnip').lsp_expand(args.body)
         end,
+      },
+      formatting = {
+        format = require("tailwindcss-colorizer-cmp").formatter
       },
       window = {
         completion = cmp.config.window.bordered {
@@ -135,7 +139,7 @@ return {
         focusable = false,
         style = 'minimal',
         border = 'rounded',
-        source = 'always',
+        source = true,
         header = '',
         prefix = '',
       },

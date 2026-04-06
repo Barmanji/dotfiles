@@ -43,6 +43,7 @@ vim.keymap.set('n', '<leader>s', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 vim.keymap.set('n', '<leader>cx', '<cmd>!chmod u+x %<CR>', { silent = true })
 
 vim.keymap.set('n', '<leader>F', vim.lsp.buf.format)
+
 vim.keymap.set('n', '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>')
 vim.keymap.set('n', '<leader>ms', '<cmd>CellularAutomaton scramble<CR>')
 
