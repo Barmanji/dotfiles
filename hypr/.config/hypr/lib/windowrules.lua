@@ -57,11 +57,13 @@ hl.window_rule({
 })
 
 -- YouTube Music
+-- YouTube Music
 hl.window_rule({
   name = "windowrule-4",
   match = { class = "com.github.th_ch.youtube_music" },
   no_blur = true,
-  opacity = "0.9"
+  opacity = "0.9",
+  workspace = "6 silent", -- This forces it to workspace 6 without pulling your screen focus
 })
 
 -- Ignore maximize requests from all apps
