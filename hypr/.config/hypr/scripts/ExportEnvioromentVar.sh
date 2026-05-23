@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-printenv > "$HOME/.config/hypr/.hypr_env"
+printenv > "$HOME/.config/hypr/legacy/.hypr_env"
