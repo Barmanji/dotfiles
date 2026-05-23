@@ -1,2 +1,0 @@
-pkill hyprpaper
-hyprpaper & disown
