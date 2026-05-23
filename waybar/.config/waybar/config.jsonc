@@ -38,8 +38,8 @@
     "custom/power": {
         "format": "⏻",
         "exec": "echo ; echo 󰟡 power // blur",
-        "on-click": "$HOME/.config/hypr/scripts/Wlogout.sh",
-        "on-click-right": "$HOME/.config/hypr/scripts/ChangeBlur.sh",
+        "on-click": "$HOME/.config/hypr/scripts/utility/Wlogout.sh",
+        "on-click-right": "$HOME/.config/hypr/scripts/ui_wallpaper/ChangeBlur.sh",
         "interval": 86400, // once every day
         "tooltip": true
     },
@@ -128,7 +128,7 @@
             "󰂂",
             "󰁹"
         ],
-        "on-click-right": "$HOME/scripts/nightlight_brightness.sh"
+        "on-click-right": "$HOME/.config/hypr/scripts/ui_wallpaper/Nightlight_brightness.sh"
     },
     // "custom/pacman": {
     //     "format": "󰅢 {}",
@@ -145,7 +145,7 @@
         "interval": "once",
         "exec": "~/.config/waybar/scripts/colorpicker.sh -j",
         "on-click": "~/.config/waybar/scripts/colorpicker.sh",
-        "on-click-right": "$HOME/scripts/screen-text-reader-ocr.sh",
+        "on-click-right": "$HOME/.config/hypr/scripts/utility/Screen-text-reader-ocr.sh",
         "signal": 1
     },
     "cpu": {

@@ -103,10 +103,8 @@ alias treenode='tree -I node_modules/'
 alias update='$HOME/scripts/system_update_and_maintainance.sh'
 
 #---- My special Shortcuts -----#
-alias gapsDisable='$HOME/scripts/gaps_and_rounding_switch.sh'
-alias gapsEnable='$HOME/scripts/gaps_and_rounding_switch.sh'
-alias currentWallpaper='$HOME/scripts/current_wallpaper.sh'
-alias deleteCurrentWallpaper='$HOME/scripts/delete_current_wallpaper.sh'
+alias currentWallpaper='$HOME/.config/hypr/scripts/ui_wallpaper/Current_wallpaper.sh'
+alias deleteCurrentWallpaper='$HOME/.config/hypr/scripts/ui_wallpaper/Delete_current_wallpaper.sh'
 alias copy='wl-copy'
 alias clock='tty-clock -t -C'
 alias pipe='pipes.sh -t'
@@ -136,7 +134,7 @@ alias fman='print -l ${(ok)commands} | fzf | xargs man'
 alias top='btop'
 alias tsync="tmux_env_sync && source $HOME/.zshrc"
 alias hi="echo bye"
-alias nightlight="~/scripts/nightlight_brightness.sh"
+alias nightlight="$HOME/.config/hypr/scripts/ui_wallpaper/Nightlight_brightness.sh"
 alias play="ncmpcpp"
 
 autoload -Uz edit-command-line

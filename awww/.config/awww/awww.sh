@@ -20,7 +20,7 @@ WALLPAPER=$(find "$WALLPAPERS_DIR" -type f \( -iname "*.jpg" -o -iname "*.jpeg" 
 
 # Apply wallpaper if found
 if [[ -n "$WALLPAPER" ]]; then
-    echo "$WALLPAPER" > "/home/barmanji/.config/hypr/current_wallpaper.txt"  # Save the wallpaper path
+    echo "$WALLPAPER" > "/home/barmanji/.config/hypr/lib/current_wallpaper.txt"  # Save the wallpaper path
 
     # Apply wallpaper with awww
     awww img "$WALLPAPER" \
