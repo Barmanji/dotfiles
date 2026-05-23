@@ -1,0 +1,2 @@
+pkill hyprpaper
+hyprpaper & disown
