@@ -60,6 +60,7 @@ return {
                 },
                 sources = {
                     explorer = {
+                        hidden = true,
                         layout = { layout = { position = "right" } },
                         win = {
                             list = {
