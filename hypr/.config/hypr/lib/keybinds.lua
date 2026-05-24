@@ -57,7 +57,7 @@ hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.resize({ x = 0, y = 15, relativ
 --
 -- MISC
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
+hl.bind(mainMod .. " + SHIFT + CTRL + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
 
 -- Switch workspaces with mainMod + [0-9]

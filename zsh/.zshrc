@@ -201,30 +201,7 @@ export PATH="$PATH:/home/barmanji/.lmstudio/bin"
 export CPATH=$(g++ -v -E -x c++ /dev/null 2>&1 | sed -n '/^#include <...> search starts here:/,$p' | tail -n +2 | sed -e '/^End of search list./q' -e 's/^ //')
 export LIBRARY_PATH=$(g++ -print-search-dirs | grep libraries | cut -d '=' -f2)
 
-# NOTE: OLD CONF
-# Add in Powerlevel10k
-# zinit ice depth=1; zinit light romkatv/powerlevel10k
-#
-# # To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
-# [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
-# export FZF_TMUX=1
-#
-# zinit light zsh-users/zsh-syntax-highlighting #Highliter
-#
-# # Lazy load plugins without messages
-# zinit light zsh-users/zsh-completions
-# zinit light zsh-users/zsh-autosuggestions
-# zinit light Aloxaf/fzf-tab
-#
-# # OMZ plugins with silent loading
-# zinit ice wait'0' silent
-# zinit snippet OMZP::git
-# zinit ice wait'0' silent
-# zinit snippet OMZP::sudo
-#
-# # Load completions
-# autoload -Uz compinit && compinit -C
-# zinit cdreplay -q #In docs it says its necessary
-
+# Npm bull shittery
 export PATH="$HOME/.npm-global/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
+# Android Expo
