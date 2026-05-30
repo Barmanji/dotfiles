@@ -1,2 +1,2 @@
 #!/bin/bash
-basename "$(swww query)"
+basename "$(awww query)"

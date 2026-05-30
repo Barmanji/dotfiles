@@ -2,9 +2,10 @@
 
 
 # Get the full path and name of the current wallpaper
-currentImageFullPath=$(swww query | grep -oP 'image: \K.*')
+currentImageFullPath=$(awww query | grep -oP 'image: \K.*')
 currentImageNameOnly=$(basename "$currentImageFullPath")
 PARENT_PID=$(ps -o ppid= -p $$)
+echo "lund"$currentImageFullPath"lund"
 
 # Show a preview of the image using Kitty's image display feature
 kitty +kitten icat "$currentImageFullPath"
@@ -25,14 +26,14 @@ if [[ "$user_input" == "y" || "$user_input" == "Y" ]]; then
     echo "Type: y for (yes) || n/<Enter> for (no)"
     rm -i "$currentImageFullPath"
 
-    notify-send -e -u critical -i "Current Image is Deleted" & exec ~/.config/swww/swww.sh
+    notify-send -e -u critical -i "Current Image is Deleted" & exec ~/.config/awww/awww.sh
 
     # Kill the terminal
 elif [[ "$user_input" == "f" || "$user_input" == "F" ]]; then
     echo "Opening file manager (Nautilus)..."
 
     # Open the current image path in Nautilus
-    nautilus "$currentImageFullPath" & exec ~/.config/swww/swww.sh
+    nautilus "$currentImageFullPath" & exec ~/.config/awww/awww.sh
 
     # Wait for 2 seconds
     sleep 10

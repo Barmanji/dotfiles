@@ -98,7 +98,6 @@ alias %age='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percen
 alias percentage='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage' #Battery %age Shortcuts
 alias battery='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage' #Battery %age Shortcuts
 alias userkey='screenkey'
-alias touchpad='hyprctl keyword "device[elan06fa:00-04f3:31be-touchpad]:enabled"'
 alias treenode='tree -I node_modules/'
 alias update='$HOME/scripts/system_update_and_maintainance.sh'
 
@@ -141,6 +140,8 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^V' edit-command-line
 
+# Touchpad enabler
+touchpad() { hyprctl eval "hl.device({ name = 'elan06fa:00-04f3:31be-touchpad', enabled = $1 })" }
 ############################## FUNCTIONAL SHORTCUTS ##################################
 #Git SSH copy and see
 function gssh() { gh repo view "$1" --json sshUrl }

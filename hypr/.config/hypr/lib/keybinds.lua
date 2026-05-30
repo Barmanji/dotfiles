@@ -9,10 +9,7 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 hl.bind(mainMod .. " + return", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.close())
 hl.bind("switch:Lid Switch", hl.dsp.exec_cmd("loginctl lock-session && hyprlock"), { locked = true })
-hl.bind(
-	mainMod .. " + M",
-	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
-)
+hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("systemctl suspend"))
 
 -- Useful defaults
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
@@ -30,7 +27,8 @@ hl.bind(mainMod .. " + C", hl.dsp.exec_cmd("$HOME/.config/awww/awww.sh"))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/utility/Power-profile.sh"))
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/ui_wallpaper/Nightlight_brightness.sh"))
 hl.bind(mainMod.. " + SHIFT + C", hl.dsp.exec_cmd("$HOME/.config/waybar/scripts/colorpicker.sh"))
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("pkill -x rofi || $HOME/.config/rofi/scripts/rofilaunch.sh"))
+-- hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("pkill -x rofi || $HOME/.config/rofi/scripts/rofilaunch.sh"))
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("nc -U /run/user/1000/walker/walker.sock"))
 hl.bind(mainMod .. " + CTRL + SPACE", hl.dsp.exec_cmd("pkill clipse || kitty --class clipse -e 'clipse'"))
 hl.bind(mainMod .. " + Delete", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/utility/Wlogout.sh"))
 hl.bind(mainMod .. " + G", hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/ui_wallpaper/Gaps_and_rounding_switch.sh"))
@@ -58,7 +56,7 @@ hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.resize({ x = 0, y = 15, relativ
 -- MISC
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + CTRL + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit")) -- dwindle only
+hl.bind(mainMod .. " + SHIFT + CTRL + J", hl.dsp.layout("togglesplit")) -- dwindle only
 
 -- Switch workspaces with mainMod + [0-9]
 -- Move active window to a workspace with mainMod + SHIFT + [0-9]
@@ -102,7 +100,7 @@ hl.bind(
 )
 hl.bind(
 	"XF86AudioMicMute",
-	hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),
+	hl.dsp.exec_cmd("$HOME/.config/hypr/scripts/utility/Mic_on_and_off_notification.sh"),
 	{ locked = true, repeating = true }
 )
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 1%+"), { locked = true, repeating = true })

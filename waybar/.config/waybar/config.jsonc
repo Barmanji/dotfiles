@@ -4,7 +4,7 @@
     "reload_style_on_change": true,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["custom/notification","clock","custom/pacman"],
-    "modules-right": ["tray","custom/expand","power-profiles-daemon", "custom/colorpicker","cpu","memory","temperature" ,"pulseaudio","custom/cava_mviz","bluetooth","battery"],
+    "modules-right": ["tray","custom/expand","power-profiles-daemon", "custom/colorpicker","pulseaudio","custom/cava_mviz","bluetooth","battery"],
 
     "power-profiles-daemon": {
         "format": "| {icon}",
@@ -148,27 +148,9 @@
         "on-click-right": "$HOME/.config/hypr/scripts/utility/Screen-text-reader-ocr.sh",
         "signal": 1
     },
-    "cpu": {
-        "format": "󰻠",
-        "tooltip": true,
-        "on-click": "gnome-calculator",
-        "on-click-right": "zen-browser"
-
-    },
-    "memory": {
-        "format": ""
-    },
-    "temperature": {
-        "thermal-zone":1,
-        "critical-threshold": 80,
-        "format": "{icon}",
-        "format-icons": [""]
-    },
     "tray": {
         "icon-size": 14,
         "spacing": 10
-
-        // "on-click-right": "kitty -e nmtui", -- DOENST WORK IDK WHY
     }
 }
 
