@@ -123,6 +123,16 @@ hl.window_rule({
   opacity = "0.9"
 })
 
+hl.window_rule({
+    match = {
+        class = "com.rafaelmardojai.Blanket", -- adjust if your system uses a different class name
+    },
+    opacity = "0.9",
+    workspace = "6 silent",
+    float = false,
+    -- Adjusts the tiling split ratio so Blanket stays narrow (0.23 = 23% of screen width)
+    -- Change this value slightly to get the exact width from your screenshot
+})
 -- LAYER RULES
 -- Waybar
 hl.layer_rule({
@@ -130,14 +140,6 @@ hl.layer_rule({
   match = { namespace = "waybar" },
   blur = true,
   ignore_alpha = 0.5
-})
-
--- Rofi
-hl.layer_rule({
-  name = "layerrule-2",
-  match = { namespace = "Rofi" },
-  blur = true,
-  ignore_alpha = 0
 })
 
 -- SwayNC Control Center

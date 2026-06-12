@@ -9,7 +9,7 @@ local mainMod = "SUPER" -- Sets "Windows" key as main modifier
 hl.bind(mainMod .. " + return", hl.dsp.exec_cmd(terminal))
 local closeWindowBind = hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.close())
 hl.bind("switch:Lid Switch", hl.dsp.exec_cmd("loginctl lock-session && hyprlock"), { locked = true })
-hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("systemctl suspend"))
+hl.bind(mainMod .. " + SHIFT + CTRL + M", hl.dsp.exec_cmd("systemctl suspend"))
 
 -- Useful defaults
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
@@ -108,8 +108,8 @@ hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 1%-"
 
 -- Requires playerctl
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause --player=chromium.instance2657"), { locked = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause --player=chromium.instance2657"), { locked = true })
 hl.bind("SHIFT+XF86AudioPlay", hl.dsp.exec_cmd("playerctl --player=firefox,%any,vlc play-pause"), { locked = true })
 hl.bind("SHIFT+XF86AudioNext", hl.dsp.exec_cmd("playerctl --player=firefox,%any,vlc next"), { locked = true })
 hl.bind("SHIFT+XF86AudioPrev", hl.dsp.exec_cmd("playerctl --player=firefox,%any,vlc previous"), { locked = true })
