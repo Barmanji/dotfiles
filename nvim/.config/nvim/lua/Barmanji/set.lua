@@ -1,6 +1,5 @@
 --vim.opt.guicursor = ""
 
-
 vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.tabstop = 4
@@ -11,7 +10,6 @@ vim.opt.smartindent = true
 vim.opt.autoindent = true
 
 vim.opt.wrap = true
-
 -- Enable folding ( setup in nvim-ufo )
 vim.o.foldenable = true     -- Enable folding by default
 vim.o.foldmethod = "manual" -- Default fold method (change as needed)

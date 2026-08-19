@@ -16,21 +16,11 @@ function ColorMyPencils(color)
 end
 
 return {
-    -- ✅ Install all themes but apply only one dynamically
-    { "folke/tokyonight.nvim" },   -- Soft blues & purples
-    -- { "catppuccin/nvim", name = "catppuccin" },  -- Pastel, smooth -- FIX: ISSUE VIM COMPILER
-    { "rebelot/kanagawa.nvim" },  -- Japan-inspired art
-    { "rmehri01/onenord.nvim" },  -- Cool nordic colors
-    { "sainnhe/edge" },  -- Balanced light & dark
-    { "EdenEast/nightfox.nvim" }, -- Multiple variants
-    { "erikbackman/brightburn.vim" },
-    { "ellisonleao/gruvbox.nvim", name = "gruvbox" },
-    { "rose-pine/neovim", name = "rose-pine" },
-    { "folke/tokyonight.nvim", lazy = false, priority = 1000 },
-
-    -- ✅ Apply a default theme on startup (Tokyonight)
+    -- Apply a default theme on startup (Tokyonight)
     {
         "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
         config = function()
             require("tokyonight").setup({
                 style = "moon",
@@ -45,5 +35,14 @@ return {
             })
             ColorMyPencils("tokyonight-moon") -- Set default theme
         end
-    }
+    },
+
+    -- Install extra themes but load them lazily (keep <leader>th picker working)
+    { "rebelot/kanagawa.nvim", event = 'VeryLazy' },  -- Japan-inspired art
+    { "rmehri01/onenord.nvim", event = 'VeryLazy' },  -- Cool nordic colors
+    { "sainnhe/edge", event = 'VeryLazy' },  -- Balanced light & dark
+    { "EdenEast/nightfox.nvim", event = 'VeryLazy' }, -- Multiple variants
+    { "erikbackman/brightburn.vim", event = 'VeryLazy' },
+    { "ellisonleao/gruvbox.nvim", name = "gruvbox", event = 'VeryLazy' },
+    { "rose-pine/neovim", name = "rose-pine", event = 'VeryLazy' },
 }

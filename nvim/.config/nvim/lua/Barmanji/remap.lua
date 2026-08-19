@@ -4,6 +4,7 @@ vim.g.mapleader = ' '
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 
+
 vim.keymap.set('n', 'J', 'mzJ`z')
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
@@ -80,6 +81,13 @@ vim.keymap.set('n', '<leader>cd', function()
 end, { desc = 'Disabled Copilot' })
 
 
+-- Wilder is a bitch -> GIVE MULTIPLE KEY JESUS
+vim.keymap.set('c', '<Tab>', function()
+    local w = require('wilder')
+    return w.in_context() and w.next() or '<Tab>'
+end, { expr = true })
 
-
-
+vim.keymap.set('c', '<S-Tab>', function()
+    local w = require('wilder')
+    return w.in_context() and w.previous() or '<S-Tab>'
+end, { expr = true })

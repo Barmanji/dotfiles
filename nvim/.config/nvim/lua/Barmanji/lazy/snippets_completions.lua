@@ -5,7 +5,6 @@ return {
   },
   {
     'L3MON4D3/LuaSnip',
-    -- add this line below:
     build = 'make install_jsregexp',
     dependencies = {
       'saadparwaiz1/cmp_luasnip',
@@ -19,11 +18,16 @@ return {
       local cmp = require 'cmp'
       require('luasnip.loaders.from_vscode').lazy_load()
 
+      local ok, colorizer = pcall(require, 'tailwindcss-colorizer-cmp')
+
       cmp.setup {
         snippet = {
           expand = function(args)
             require('luasnip').lsp_expand(args.body)
           end,
+        },
+        formatting = {
+          format = ok and colorizer.formatter or nil,
         },
         window = {
           completion = cmp.config.window.bordered(),
