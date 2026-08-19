@@ -13,7 +13,7 @@
   "notification-body-image-width": 200,
   "layer": "overlay",
   "layer-shell": true,
-  "cssPriority": "application",
+  "cssPriority": "user",
   "timeout": 8,
   "timeout-low": 4,
   "timeout-critical": 1,

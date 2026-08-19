@@ -179,6 +179,7 @@ hl.config({
 			drag_lock = 0,
 			scroll_factor = 2.0,
 			clickfinger_behavior = true,
+            disable_while_typing = false -- Disable me maybe
 		},
 	},
 })

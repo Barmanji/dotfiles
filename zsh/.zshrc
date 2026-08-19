@@ -134,8 +134,7 @@ alias ts='$HOME/scripts/tmux_sessionizer'
 alias tss='$HOME/scripts/tmux_sessionizer "$(pwd)"'
 alias fman='print -l ${(ok)commands} | fzf | xargs man'
 alias top='btop'
-alias tsync="tmux_env_sync && source $HOME/.zshrc"
-alias hi="echo bye"
+alias tsync="tmux_env_sync && exec zsh"
 alias nightlight="$HOME/.config/hypr/scripts/ui_wallpaper/Nightlight_brightness.sh"
 alias play="ncmpcpp"
 
@@ -208,4 +207,4 @@ export LIBRARY_PATH=$(g++ -print-search-dirs | grep libraries | cut -d '=' -f2)
 # Npm bull shittery
 export PATH="$HOME/.npm-global/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
-# Android Expo
+

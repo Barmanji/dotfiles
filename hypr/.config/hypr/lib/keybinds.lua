@@ -107,11 +107,23 @@ hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 1%+"),
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 1%-"), { locked = true, repeating = true })
 
 -- Requires playerctl
-hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause --player=chromium.instance2657"), { locked = true })
-hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause --player=chromium.instance2657"), { locked = true })
+hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next --player=chromium"), { locked = true })
+hl.bind("XF86AudioStop", hl.dsp.exec_cmd("playerctl stop --player=chromium"), { locked = true })
+hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous --player=chromium"), { locked = true })
+hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause --player=chromium"), { locked = true })
+hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause --player=chromium"), { locked = true })
+
+hl.bind("CTRL+SHIFT+XF86AudioPlay", hl.dsp.exec_cmd("playerctl --player=Blanket play-pause"), { locked = true })
+hl.bind("CTRL+SHIFT+XF86AudioNext", hl.dsp.exec_cmd("playerctl --player=Blanket next"), { locked = true })
+hl.bind("CTRL+SHIFT+XF86AudioPrev", hl.dsp.exec_cmd("playerctl --player=Blanket previous"), { locked = true })
+
+hl.bind("CTRL+XF86AudioPlay", hl.dsp.exec_cmd("playerctl --player=firefox,%any,vlc play-pause"), { locked = true })
+hl.bind("CTRL+XF86AudioNext", hl.dsp.exec_cmd("playerctl --player=firefox,%any,vlc next"), { locked = true })
+hl.bind("CTRL+XF86AudioPrev", hl.dsp.exec_cmd("playerctl --player=firefox,%any,vlc previous"), { locked = true })
+
 hl.bind("SHIFT+XF86AudioPlay", hl.dsp.exec_cmd("playerctl --player=firefox,%any,vlc play-pause"), { locked = true })
 hl.bind("SHIFT+XF86AudioNext", hl.dsp.exec_cmd("playerctl --player=firefox,%any,vlc next"), { locked = true })
 hl.bind("SHIFT+XF86AudioPrev", hl.dsp.exec_cmd("playerctl --player=firefox,%any,vlc previous"), { locked = true })
+
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 

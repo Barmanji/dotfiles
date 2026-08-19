@@ -32,10 +32,10 @@ end)
 
 hl.on("hyprland.start", function()
 	hl.exec_cmd("zen-browser", { workspace = "2 silent" })
-	hl.exec_cmd(terminal .. "-e momoisay -f", { workspace = "3" })
+	hl.exec_cmd(terminal, { workspace = "3" })
 	hl.exec_cmd("blanket", { workspace = "6 silent" })
 	hl.exec_cmd(terminal, { workspace = "special:magic silent" })
-	-- hl.exec_cmd("$HOME/.config/hypr/scripts/utility/Music_sleep_autoYtMusicStopperForStartup.sh", { workspace = "6 silent" })
+	hl.exec_cmd("$HOME/.config/hypr/scripts/utility/Music_sleep_autoYtMusicStopperForStartup.sh", { workspace = "6 silent" })
 	hl.exec_cmd(terminal, { workspace = "10 silent" })
 end)
 -------------------------------

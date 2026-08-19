@@ -18,7 +18,7 @@ end
 return {
     -- ✅ Install all themes but apply only one dynamically
     { "folke/tokyonight.nvim" },   -- Soft blues & purples
-    { "catppuccin/nvim", name = "catppuccin" },  -- Pastel, smooth
+    -- { "catppuccin/nvim", name = "catppuccin" },  -- Pastel, smooth -- FIX: ISSUE VIM COMPILER
     { "rebelot/kanagawa.nvim" },  -- Japan-inspired art
     { "rmehri01/onenord.nvim" },  -- Cool nordic colors
     { "sainnhe/edge" },  -- Balanced light & dark

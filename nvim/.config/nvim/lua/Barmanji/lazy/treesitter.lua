@@ -48,6 +48,7 @@ return {
           'vimdoc',
           'c',
           'rust',
+        'prisma'
         },
         incremental_selection = {
           enable = true,
