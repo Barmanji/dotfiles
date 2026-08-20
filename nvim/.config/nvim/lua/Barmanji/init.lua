@@ -53,8 +53,9 @@ autocmd('LspAttach', {
     end
 })
 
+-- GOD FUCKING DAMN WORKAROUND TO DISABLE FUCKING TAILWIND COLORIZER - I AM MAD
 -- Disable LSP document colors
-vim.lsp.document_color.enable(false)
+-- vim.lsp.document_color.enable(false)
 
 -- Safety net for every time you switch buffers
 vim.api.nvim_create_autocmd({ "BufEnter", "LspAttach" }, {

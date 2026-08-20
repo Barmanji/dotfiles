@@ -53,11 +53,17 @@ vim.keymap.set('n', '<leader><Tab>', 'za', { desc = 'Toggle fold' })
 
 vim.keymap.set('n', '<leader>x', '<cmd>close<CR>', { desc = 'Close current split' })
 
--- Copy filepath to the clipboard
+-- Copy filepath to the clipboard - I LVOE THIS
 vim.keymap.set('n', '<leader>fp', function()
-  local filePath = vim.fn.expand '%:~' -- Gets the file path relative to the home directory
-  vim.fn.setreg('+', filePath) -- Copy the file path to the clipboard register
-  print('File path copied to clipboard: ' .. filePath) -- Optional: print message to confirm
+  local filePath
+  local ok, oil = pcall(require, 'oil')
+  if ok and vim.bo.filetype == 'oil' then
+    filePath = oil.get_current_dir()
+  else
+    filePath = vim.fn.expand '%:~'
+  end
+  vim.fn.setreg('+', filePath)
+  print('File path copied to clipboard: ' .. filePath)
 end, { desc = 'Copy file path to clipboard' })
 
 -- Toggle LSP diagnostics visibility
