@@ -76,6 +76,7 @@ vim.keymap.set('n', '<leader>lx', function()
   }
 end, { desc = 'Toggle LSP diagnostics' })
 
+-- Copilot shittery
 vim.keymap.set('n', '<leader>ce', function()
 vim.cmd('Copilot enable')
   print ('Copilot enabled')
