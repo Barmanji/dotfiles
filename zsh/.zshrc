@@ -138,6 +138,11 @@ alias tsync="tmux_env_sync && exec zsh"
 alias nightlight="$HOME/.config/hypr/scripts/ui_wallpaper/Nightlight_brightness.sh"
 alias play="ncmpcpp"
 
+#----- DOCKER ----#
+alias dc='docker container ls'
+alias di='docker image ls'
+alias dn='docker network ls'
+
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^V' edit-command-line
@@ -208,3 +213,5 @@ export LIBRARY_PATH=$(g++ -print-search-dirs | grep libraries | cut -d '=' -f2)
 export PATH="$HOME/.npm-global/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

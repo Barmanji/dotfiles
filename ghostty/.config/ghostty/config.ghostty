@@ -1,0 +1,15 @@
+theme = Banana Blueberry
+# theme = GruvboxDark
+# font-family = Meslo LGS Nerd Font Mono
+font-family = Iosevka
+font-size = 11.8
+background-opacity = 0.90
+foreground = CDD6F4
+# background = 16161D
+confirm-close-surface = false
+gtk-titlebar = false
+# custom-shader = /home/chris/bloom.glsl
+#custom-shader = /home/chris/crt.glsl
+cursor-color = #F5E0DC
+cursor-text = #c6d0f5
+
