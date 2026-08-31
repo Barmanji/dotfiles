@@ -22,6 +22,8 @@ return {
 			vim.lsp.protocol.make_client_capabilities(),
 			cmp_lsp.default_capabilities()
 		)
+		-- disable Neovim's own recursive workspace file watcher
+		-- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
 		require("fidget").setup({})
 		require("mason").setup()
@@ -30,7 +32,7 @@ return {
 				"lua_ls",
 				"rust_analyzer",
 				"gopls",
-				"vtsls",
+				-- "vtsls",
 				"tailwindcss",
 			},
 			handlers = {
@@ -66,48 +68,49 @@ return {
 					})
 				end,
 
-				["vtsls"] = function()
-					require("lspconfig").vtsls.setup({
-						capabilities = capabilities,
-						settings = {
-							vtsls = {
-								tsserver = {
-									maxTsServerMemory = 4096,
-								},
-							},
-							typescript = {
-								preferences = {
-									includeInlayParameterNameHints = "all",
-									includeCompletionsForModuleExports = false,
-								},
-								suggest = {
-									autoImports = false,
-									updateImportsOnFileMove = {
-										enabled = "never",
-									},
-								},
-								tsserver = {
-									watchOptions = {
-										exclude = {
-											"**/node_modules/**",
-											"**/.next/**",
-											"**/.dist/**",
-											"**/dist/**",
-											"**/.turbo/**",
-											"**/.git/**",
-											"**/.agent/**",
-											"**/.claude/**",
-											"**/.devin/**",
-											"**/.github/**",
-											"**/.windsurf/**",
-										},
-									},
-								},
-							},
-						},
-					})
-				end,
-
+				-- ["vtsls"] = function()
+				-- 	require("lspconfig").vtsls.setup({
+				-- 		capabilities = capabilities,
+				-- 		settings = {
+				-- 			vtsls = {
+				-- 				tsserver = {
+				-- 					maxTsServerMemory = 4096,
+				-- 				},
+				-- 			},
+				-- 			typescript = {
+				-- 				preferences = {
+				-- 					includeInlayParameterNameHints = "all",
+				-- 					includeCompletionsForModuleExports = false,
+				-- 				},
+				-- 				suggest = {
+				-- 					autoImports = false,
+				-- 					updateImportsOnFileMove = {
+				-- 						enabled = "never",
+				-- 					},
+				-- 				},
+				-- 				tsserver = {
+				-- 					watchOptions = {
+				-- 						watchFile = "useFsEvents",
+				-- 						watchDirectory = "useFsEvents",
+				-- 						excludeDirectories = {
+				-- 							"**/node_modules",
+				-- 							"**/.next",
+				-- 							"**/dist",
+				-- 							"**/.turbo",
+				-- 							"**/.git",
+				-- 							"**/.agent",
+				-- 							"**/.claude",
+				-- 							"**/.devin",
+				-- 							"**/.github",
+				-- 							"**/.windsurf",
+				-- 						},
+				-- 					},
+				-- 				},
+				-- 			},
+				-- 		},
+				-- 	})
+				-- end,
+				--
 				["tailwindcss"] = function()
 					require("lspconfig").tailwindcss.setup({
 						capabilities = capabilities,
@@ -140,6 +143,16 @@ return {
 				end,
 			},
 		})
+		-- TEST: Trying TSC (tsgo faster vtsls alt)
+		vim.lsp.config("tsc", {
+			cmd = { "tsc", "--lsp", "--stdio" }, -- or local path
+			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+			root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
+			capabilities = capabilities,
+		})
+		vim.lsp.enable("tsc")
+		-- trying tsc
+
 		local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 		cmp.setup({
