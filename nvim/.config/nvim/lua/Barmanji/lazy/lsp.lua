@@ -2,8 +2,22 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
+		{
+			"mason.nvim",
+			opts = {},
+		},
+		{
+			"mason-org/mason-lspconfig.nvim",
+			opts = {
+				ensure_installed = {
+					"lua_ls",
+					"rust_analyzer",
+					"gopls",
+					"tailwindcss",
+				},
+				automatic_enable = true,
+			},
+		},
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
@@ -16,144 +30,138 @@ return {
 	config = function()
 		local cmp = require("cmp")
 		local cmp_lsp = require("cmp_nvim_lsp")
-		local capabilities = vim.tbl_deep_extend(
-			"force",
-			{},
-			vim.lsp.protocol.make_client_capabilities(),
-			cmp_lsp.default_capabilities()
-		)
-		-- disable Neovim's own recursive workspace file watcher
-		-- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
-		require("fidget").setup({})
+		local capabilities =
+			vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), cmp_lsp.default_capabilities())
+
+		----------------------------------------------------------------------
+		-- Mason
+		----------------------------------------------------------------------
+
 		require("mason").setup()
-		require("mason-lspconfig").setup({
-			ensure_installed = {
-				"lua_ls",
-				"rust_analyzer",
-				"gopls",
-				-- "vtsls",
-				"tailwindcss",
-			},
-			handlers = {
-				function(server_name)
-					require("lspconfig")[server_name].setup({
-						capabilities = capabilities,
-					})
-				end,
+		require("fidget").setup({})
 
-				["lua_ls"] = function()
-					require("lspconfig").lua_ls.setup({
-						capabilities = capabilities,
-						settings = {
-							Lua = {
-								runtime = { version = "LuaJIT" },
-								diagnostics = { globals = { "vim" } },
-								workspace = {
-									library = {
-										vim.env.VIMRUNTIME,
-										"${3rd}/luv/library",
-									},
-									checkThirdParty = false,
-								},
-								format = {
-									enable = true,
-									defaultConfig = {
-										indent_style = "space",
-										indent_size = "2",
-									},
-								},
-							},
-						},
-					})
-				end,
+		----------------------------------------------------------------------
+		-- Global LSP capabilities
+		----------------------------------------------------------------------
 
-				-- ["vtsls"] = function()
-				-- 	require("lspconfig").vtsls.setup({
-				-- 		capabilities = capabilities,
-				-- 		settings = {
-				-- 			vtsls = {
-				-- 				tsserver = {
-				-- 					maxTsServerMemory = 4096,
-				-- 				},
-				-- 			},
-				-- 			typescript = {
-				-- 				preferences = {
-				-- 					includeInlayParameterNameHints = "all",
-				-- 					includeCompletionsForModuleExports = false,
-				-- 				},
-				-- 				suggest = {
-				-- 					autoImports = false,
-				-- 					updateImportsOnFileMove = {
-				-- 						enabled = "never",
-				-- 					},
-				-- 				},
-				-- 				tsserver = {
-				-- 					watchOptions = {
-				-- 						watchFile = "useFsEvents",
-				-- 						watchDirectory = "useFsEvents",
-				-- 						excludeDirectories = {
-				-- 							"**/node_modules",
-				-- 							"**/.next",
-				-- 							"**/dist",
-				-- 							"**/.turbo",
-				-- 							"**/.git",
-				-- 							"**/.agent",
-				-- 							"**/.claude",
-				-- 							"**/.devin",
-				-- 							"**/.github",
-				-- 							"**/.windsurf",
-				-- 						},
-				-- 					},
-				-- 				},
-				-- 			},
-				-- 		},
-				-- 	})
-				-- end,
-				--
-				["tailwindcss"] = function()
-					require("lspconfig").tailwindcss.setup({
-						capabilities = capabilities,
-						filetypes = {
-							"html",
-							"css",
-							"scss",
-							"javascript",
-							"javascriptreact",
-							"typescript",
-							"typescriptreact",
-							"vue",
-							"svelte",
-							"heex",
-						},
-						settings = {
-							tailwindCSS = {
-								classAttributes = { "class", "className", "classList", "ngClass" },
-								lint = {
-									cssConflict = "warning",
-									invalidApply = "error",
-									invalidConfigPath = "error",
-									invalidTailwindDirective = "error",
-									recommendedVariantOrder = "warning",
-								},
-								validate = true,
-							},
-						},
-					})
-				end,
-			},
-		})
-		-- TEST: Trying TSC (tsgo faster vtsls alt)
-		vim.lsp.config("tsc", {
-			cmd = { "tsc", "--lsp", "--stdio" }, -- or local path
-			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
-			root_markers = { "tsconfig.json", "jsconfig.json", "package.json", ".git" },
+		vim.lsp.config("*", {
 			capabilities = capabilities,
 		})
-		vim.lsp.enable("tsc")
-		-- trying tsc
 
-		local cmp_select = { behavior = cmp.SelectBehavior.Select }
+		----------------------------------------------------------------------
+		-- Lua
+		----------------------------------------------------------------------
+
+		vim.lsp.config("lua_ls", {
+			settings = {
+				Lua = {
+					runtime = {
+						version = "LuaJIT",
+					},
+
+					diagnostics = {
+						globals = {
+							"vim",
+						},
+					},
+
+					workspace = {
+						library = {
+							vim.env.VIMRUNTIME,
+							"${3rd}/luv/library",
+						},
+
+						checkThirdParty = false,
+					},
+
+					format = {
+						enable = true,
+
+						defaultConfig = {
+							indent_style = "space",
+							indent_size = "2",
+						},
+					},
+				},
+			},
+		})
+
+		----------------------------------------------------------------------
+		-- Tailwind
+		----------------------------------------------------------------------
+
+		vim.lsp.config("tailwindcss", {
+			filetypes = {
+				"html",
+				"css",
+				"scss",
+				"javascript",
+				"javascriptreact",
+				"typescript",
+				"typescriptreact",
+				"vue",
+				"svelte",
+				"heex",
+			},
+
+			settings = {
+				tailwindCSS = {
+					classAttributes = {
+						"class",
+						"className",
+						"classList",
+						"ngClass",
+					},
+
+					lint = {
+						cssConflict = "warning",
+						invalidApply = "error",
+						invalidConfigPath = "error",
+						invalidTailwindDirective = "error",
+						recommendedVariantOrder = "warning",
+					},
+
+					validate = true,
+				},
+			},
+		})
+
+		----------------------------------------------------------------------
+		-- TypeScript-Go / native TypeScript LSP
+		----------------------------------------------------------------------
+
+		vim.lsp.config("tsc", {
+			cmd = {
+				"tsc",
+				"--lsp",
+				"--stdio",
+			},
+
+			filetypes = {
+				"javascript",
+				"javascriptreact",
+				"typescript",
+				"typescriptreact",
+			},
+
+			root_markers = {
+				"tsconfig.json",
+				"jsconfig.json",
+				"package.json",
+				".git",
+			},
+		})
+
+		vim.lsp.enable("tsc")
+
+		----------------------------------------------------------------------
+		-- Completion
+		----------------------------------------------------------------------
+
+		local cmp_select = {
+			behavior = cmp.SelectBehavior.Select,
+		}
 
 		cmp.setup({
 			snippet = {
@@ -161,23 +169,30 @@ return {
 					require("luasnip").lsp_expand(args.body)
 				end,
 			},
+
 			formatting = {
 				format = require("tailwindcss-colorizer-cmp").formatter,
 			},
+
 			window = {
 				completion = cmp.config.window.bordered({
 					border = "rounded",
 				}),
+
 				documentation = cmp.config.window.bordered({
 					border = "rounded",
 				}),
 			},
+
 			mapping = cmp.mapping.preset.insert({
 				["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
 				["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-				["<C-y>"] = cmp.mapping.confirm({ select = true }),
+				["<C-y>"] = cmp.mapping.confirm({
+					select = true,
+				}),
 				["<C-Space>"] = cmp.mapping.complete(),
 			}),
+
 			sources = cmp.config.sources({
 				{ name = "copilot" },
 				{ name = "nvim_lsp" },
@@ -188,11 +203,17 @@ return {
 			}),
 		})
 
+		----------------------------------------------------------------------
+		-- Diagnostics
+		----------------------------------------------------------------------
+
 		vim.diagnostic.config({
 			virtual_text = true,
 			signs = true,
 			underline = true,
+
 			update_in_insert = false,
+
 			float = {
 				focusable = false,
 				style = "minimal",

@@ -35,28 +35,39 @@ autocmd({ "BufWritePre" }, {
     command = [[%s/\s\+$//e]],
 })
 
-autocmd('LspAttach', {
-    group = BarmanjiGroup,
-    callback = function(e)
-        local opts = { buffer = e.buf }
-        vim.keymap.set("n", "gd", function()
-            vim.lsp.buf.definition()
-        end, opts)
-        vim.keymap.set("n", "K",            function() vim.lsp.buf.hover({ border = "rounded" }) end, opts)
-        vim.keymap.set("n", "<leader>vws",  function() vim.lsp.buf.workspace_symbol() end, opts)
-        vim.keymap.set("n", "<leader>vde",  function() vim.lsp.buf.declaration() end, opts)
-        vim.keymap.set("n", "<leader>vd",   function() vim.diagnostic.open_float() end, opts)
-        vim.keymap.set("n", "<leader>vca",  function() vim.lsp.buf.code_action() end, opts)
-        vim.keymap.set("n", "<leader>vrr",  function() vim.lsp.buf.references() end, opts)
-        vim.keymap.set("n", "<leader>vrn",  function() vim.lsp.buf.rename() end, opts)
-        vim.keymap.set("i", "<C-h>",        function() vim.lsp.buf.signature_help({border= "rounded"}) end, opts)
-    end
+autocmd("LspAttach", {
+	group = BarmanjiGroup,
+
+	callback = function(e)
+		local opts = { buffer = e.buf }
+
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+
+		vim.keymap.set("n", "K", function()
+			vim.lsp.buf.hover({ border = "rounded" })
+		end, opts)
+
+		vim.keymap.set("n", "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
+		vim.keymap.set("n", "<leader>vde", vim.lsp.buf.declaration, opts)
+		vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
+		vim.keymap.set("n", "<leader>vca", vim.lsp.buf.code_action, opts)
+		vim.keymap.set("n", "<leader>vrr", vim.lsp.buf.references, opts)
+		vim.keymap.set("n", "<leader>vrn", vim.lsp.buf.rename, opts)
+
+		vim.keymap.set("i", "<C-h>", function()
+			vim.lsp.buf.signature_help({ border = "rounded" })
+		end, opts)
+
+		-- Disable Tailwind document colors
+		local client = vim.lsp.get_client_by_id(e.data.client_id)
+
+		if client and client.name == "tailwindcss" then
+			vim.lsp.document_color.enable(false, {
+				bufnr = e.buf,
+			})
+		end
+	end,
 })
-
--- GOD FUCKING DAMN WORKAROUND TO DISABLE FUCKING TAILWIND COLORIZER - I AM MAD
--- Disable LSP document colors
--- vim.lsp.document_color.enable(false)
-
 -- Safety net for every time you switch buffers
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
@@ -76,3 +87,4 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.bo.expandtab = true
   end,
 })
+
