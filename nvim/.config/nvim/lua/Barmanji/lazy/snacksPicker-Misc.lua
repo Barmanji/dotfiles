@@ -49,12 +49,36 @@ return {
                     conceal = false,
                 },
             },
+            indent = {
+                priority = 1,
+
+                animate = {
+                    enabled = false,
+                    style = "out",
+                    easing = "linear",
+                    duration = {
+                        step = 10, -- ms per step
+                        total = 100, -- maximum duration
+                    },
+                },
+
+                scope = {
+                    enabled = true, -- enable highlighting the current scope
+                    priority = 200,
+                    char = "│",
+                    underline = false, -- underline the start of the scope
+                    only_current = true, -- only show scope in the current window
+                    hl = "SnacksIndentScope", ---@type string|string[] hl group for scopes
+                },
+            },
+
             quickfile = {
                 enabled = true,
                 exclude = { "latex" },
             },
             -- HACK: read picker docs @ https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
             picker = {
+                exclude = { "git", "git_status", "git_branches", "git_log", "node_modules", "build","dist", ".git", ".cache", ".agent", ".turbo", ".claude", ".devin", ".windsurf", ".next" },
                 main = {
                     file = false
                 },
@@ -209,36 +233,6 @@ return {
             { "<leader>th",       function() require("snacks").picker.colorschemes({ layout = "ivy" }) end,          desc = "Pick Color Schemes" },
         }
     },
-    -- NOTE: Indent
-    {
-        "folke/snacks.nvim",
-        ---@type snacks.Config
-        opts = {
-            indent = {
-                priority = 1,
-
-                animate = {
-                    enabled = false,
-                    style = "out",
-                    easing = "linear",
-                    duration = {
-                        step = 10, -- ms per step
-                        total = 100, -- maximum duration
-                    },
-                },
-
-                scope = {
-                    enabled = true, -- enable highlighting the current scope
-                    priority = 200,
-                    char = "│",
-                    underline = false, -- underline the start of the scope
-                    only_current = true, -- only show scope in the current window
-                    hl = "SnacksIndentScope", ---@type string|string[] hl group for scopes
-                },
-            },
-        },
-    },
-
     -- NOTE: Todo comments w/ snacks
     {
         "folke/todo-comments.nvim",

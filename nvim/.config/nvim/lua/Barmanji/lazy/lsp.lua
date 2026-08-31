@@ -66,6 +66,48 @@ return {
 					})
 				end,
 
+				["vtsls"] = function()
+					require("lspconfig").vtsls.setup({
+						capabilities = capabilities,
+						settings = {
+							vtsls = {
+								tsserver = {
+									maxTsServerMemory = 4096,
+								},
+							},
+							typescript = {
+								preferences = {
+									includeInlayParameterNameHints = "all",
+									includeCompletionsForModuleExports = false,
+								},
+								suggest = {
+									autoImports = false,
+									updateImportsOnFileMove = {
+										enabled = "never",
+									},
+								},
+								tsserver = {
+									watchOptions = {
+										exclude = {
+											"**/node_modules/**",
+											"**/.next/**",
+											"**/.dist/**",
+											"**/dist/**",
+											"**/.turbo/**",
+											"**/.git/**",
+											"**/.agent/**",
+											"**/.claude/**",
+											"**/.devin/**",
+											"**/.github/**",
+											"**/.windsurf/**",
+										},
+									},
+								},
+							},
+						},
+					})
+				end,
+
 				["tailwindcss"] = function()
 					require("lspconfig").tailwindcss.setup({
 						capabilities = capabilities,
@@ -80,6 +122,19 @@ return {
 							"vue",
 							"svelte",
 							"heex",
+						},
+						settings = {
+							tailwindCSS = {
+								classAttributes = { "class", "className", "classList", "ngClass" },
+								lint = {
+									cssConflict = "warning",
+									invalidApply = "error",
+									invalidConfigPath = "error",
+									invalidTailwindDirective = "error",
+									recommendedVariantOrder = "warning",
+								},
+								validate = true,
+							},
 						},
 					})
 				end,

@@ -58,13 +58,15 @@ autocmd('LspAttach', {
 -- vim.lsp.document_color.enable(false)
 
 -- Safety net for every time you switch buffers
-vim.api.nvim_create_autocmd({ "BufEnter", "LspAttach" }, {
-    group = BarmanjiGroup,
+vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
-        vim.lsp.document_color.enable(false, args.buf)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client and client.name == "tailwindcss" then
+            vim.lsp.document_color.enable(false, { bufnr = args.buf })
+        end
     end,
 })
-
+--
 -- For snacks.indent to fucking WORK
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact", "json" },

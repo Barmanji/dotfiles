@@ -4,7 +4,7 @@ return {
   {
     'kevinhwang91/nvim-ufo',
     dependencies = { 'kevinhwang91/promise-async' },
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = "VeryLazy",
     init = function()
       -- SETTINGS
       vim.o.foldcolumn = '0'
@@ -24,7 +24,6 @@ return {
         pattern = '*.*',
         callback = function() vim.cmd('silent! loadview') end,
       })
-
       -- COLORS: Define your custom colors here
       vim.api.nvim_set_hl(0, 'UfoFoldArrow', { fg = '#7aa2f7', bold = true }) -- colored Arrow
       vim.api.nvim_set_hl(0, 'UfoFoldCount', { fg = '#7aa2f7', bold = true }) -- colored Number

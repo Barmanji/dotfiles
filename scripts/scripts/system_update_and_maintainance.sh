@@ -48,3 +48,8 @@ echo "----------------------------------------------------"
 
 sudo journalctl --vacuum-time=7d
 echo ""
+echo "----------------------------------------------------"
+echo "CLEARING STALE NODE_MODULES / .NEXT"
+echo "----------------------------------------------------"
+~/scripts/clean_stale_build_dirs.sh
+echo ""
