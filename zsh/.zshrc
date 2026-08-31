@@ -193,22 +193,8 @@ source /usr/share/nvm/init-nvm.sh
 
 # pnpm
 export PNPM_HOME="/home/barmanji/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
+export PATH="$PNPM_HOME:$PATH"
 #
-### CONDA ###
-[ -f /opt/anaconda/etc/profile.d/conda.sh ] && source /opt/anaconda/etc/profile.d/conda.sh
-export CRYPTOGRAPHY_OPENSSL_NO_LEGACY=1
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/home/barmanji/.lmstudio/bin"
-# End of LM Studio CLI section
-export CPATH=$(g++ -v -E -x c++ /dev/null 2>&1 | sed -n '/^#include <...> search starts here:/,$p' | tail -n +2 | sed -e '/^End of search list./q' -e 's/^ //')
-export LIBRARY_PATH=$(g++ -print-search-dirs | grep libraries | cut -d '=' -f2)
-
 # Npm bull shittery
 export PATH="$HOME/.npm-global/bin:$PATH"
 export XDG_CONFIG_HOME="$HOME/.config"

@@ -30,24 +30,6 @@ return {
                     "pdf",
                 },
                 force = false,
-                doc = {
-                    -- enable image viewer for documents
-                    -- a treesitter parser must be available for the enabled languages.
-                    -- supported language injections: markdown, html
-                    enabled = false,
-                    -- render the image inline in the buffer
-                    -- if your env doesn't support unicode placeholders, this will be disabled
-                    -- takes precedence over `opts.float` on supported terminals
-                    inline = false,
-                    -- render the image in a floating window
-                    -- only used if `opts.inline` is disabled
-                    float = false,
-                    max_width = 80,
-                    max_height = 40,
-                    -- Set to `true`, to conceal the image text when rendering inline.
-                    -- (experimental)
-                    conceal = false,
-                },
             },
             indent = {
                 priority = 1,
@@ -78,7 +60,7 @@ return {
             },
             -- HACK: read picker docs @ https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
             picker = {
-                exclude = { "git", "git_status", "git_branches", "git_log", "node_modules", "build","dist", ".git", ".cache", ".agent", ".turbo", ".claude", ".devin", ".windsurf", ".next" },
+                exclude = { "git", "git_status", "git_branches", "git_log", "node_modules", "build","dist", ".git", ".cache", ".agents", ".turbo", ".claude", ".devin", ".windsurf", ".next", ".cursor" },
                 main = {
                     file = false
                 },
